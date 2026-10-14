@@ -1,0 +1,105 @@
+ :root {
+  --maroon: #5a1727; --deep: #3e0e1b; --wine: #7b2a3c; --ivory: #fbf6ed;
+  --paper: #fffaf2; --gold: #b99a62; --ink: #452d2e; --muted: #8b7770;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--ivory); color: var(--ink); font-family: "DM Sans", sans-serif; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { font: inherit; cursor: pointer; }
+.grain { pointer-events:none; position:fixed; inset:0; z-index:10; opacity:.13; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.17'/%3E%3C/svg%3E"); }
+main { width:100%; overflow:hidden; }
+.intro { min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; padding:42px 22px; background:radial-gradient(ellipse at 50% 40%, #fffdf7 0, #f7ecdf 62%, #efe0d2 100%); text-align:center; }
+.intro:before, .intro:after { content:""; position:absolute; width:170px; height:170px; border:1px solid rgba(185,154,98,.45); border-radius:50%; }
+.intro:before { top:-90px; left:-80px; } .intro:after { bottom:-100px; right:-70px; }
+.eyebrow { letter-spacing:.22em; font-size:10px; line-height:1.8; color:var(--wine); margin:0 0 18px; font-weight:600; }
+.envelope-wrap { width:min(78vw,330px); height:230px; display:grid; place-items:center; margin:6px 0 18px; perspective:900px; }
+.envelope { width:100%; height:190px; position:relative; filter:drop-shadow(0 17px 18px rgba(67,24,32,.14)); transition:transform .7s ease; }
+.envelope-back { position:absolute; inset:0; background:#e7d1b6; border-radius:4px; }
+.letter { position:absolute; z-index:1; left:8%; right:8%; top:8%; height:85%; background:var(--paper); border:1px solid #ddc9a6; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:10px; transition:transform 1s cubic-bezier(.2,.8,.2,1), opacity .4s; }
+.letter-small { font-size:8px; letter-spacing:.18em; color:var(--wine); }
+.letter-names { font-family:"Great Vibes",cursive; font-size:44px; color:var(--maroon); }
+.letter-names i { font-family:"Cormorant Garamond",serif; font-size:23px; }
+.letter-date { font-size:9px; letter-spacing:.18em; color:var(--muted); }
+.envelope-left,.envelope-right,.envelope-bottom,.envelope-flap { position:absolute; inset:0; }
+.envelope-left { z-index:3; background:#e8d6bf; clip-path:polygon(0 0,50% 54%,0 100%); }
+.envelope-right { z-index:3; background:#ddc5a7; clip-path:polygon(100% 0,50% 54%,100% 100%); }
+.envelope-bottom { z-index:4; background:#d5b89a; clip-path:polygon(0 100%,50% 47%,100% 100%); }
+.envelope-flap { z-index:5; background:#f0dfc8; clip-path:polygon(0 0,100% 0,50% 58%); transform-origin:top; transition:transform .8s ease; backface-visibility:hidden; }
+.wax-seal { position:absolute; z-index:6; left:50%; top:48%; transform:translate(-50%,-50%); width:43px; height:43px; border-radius:50%; background:radial-gradient(circle at 35% 30%,#963b4d,#5a1727 65%); color:#f3dcae; border:1px solid #bd8d70; display:grid; place-items:center; font-family:"Cormorant Garamond",serif; font-size:12px; box-shadow:0 3px 8px #81515b55; transition:opacity .3s, transform .3s; }
+.wax-seal span { font-size:8px; margin:0 1px; }
+.intro.opened .envelope-flap { transform:rotateX(180deg); z-index:0; }
+.intro.opened .letter { transform:translateY(-100px); }
+.intro.opened .wax-seal { opacity:0; transform:translate(-50%,-50%) scale(.3); }
+.intro.opened .envelope { transform:translateY(18px) scale(.96); }
+.intro-names { font-family:"Cormorant Garamond",serif; font-size:clamp(29px,7vw,42px); color:var(--maroon); margin:4px 0 2px; }
+.intro-names span,.closing-names span { font-family:"Great Vibes",cursive; color:var(--gold); padding:0 4px; }
+.intro-hint { color:var(--muted); font-family:"Cormorant Garamond",serif; font-style:italic; font-size:17px; margin:3px 0 24px; }
+.intro-flower { position:absolute; color:#b68c6b; opacity:.6; font-size:90px; line-height:1; }
+.flower-one { left:7%; top:12%; transform:rotate(-25deg); } .flower-two { right:6%; bottom:12%; transform:rotate(25deg); }
+.primary-btn,.outline-btn { border-radius:2px; min-height:48px; padding:13px 23px; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:12px; font-size:11px; letter-spacing:.07em; transition:transform .2s,background .2s; }
+.primary-btn { color:#fff8ef; background:var(--maroon); border:1px solid var(--maroon); box-shadow:0 7px 18px #5a17271b; }
+.primary-btn:active,.outline-btn:active { transform:scale(.98); }
+.primary-btn span { color:#d8b77e; font-size:16px; }
+.outline-btn { color:var(--maroon); border:1px solid #b99a62; background:transparent; }
+.hidden { display:none !important; }
+.invitation { animation:fadeIn .9s ease both; }
+.section-pad { padding:76px 24px; text-align:center; }
+.hero { min-height:680px; display:flex; flex-direction:column; justify-content:center; align-items:center; position:relative; background:linear-gradient(180deg,#fbf6ed,#f6eadb); border-bottom:1px solid #ead9c4; }
+.ornament,.closing-ornament { color:var(--gold); font-size:36px; margin-bottom:22px; }
+.bismillah { font-family:"Cormorant Garamond",serif; font-size:16px; font-style:italic; color:var(--muted); margin:-8px 0 25px; }
+.thin-rule { width:120px; height:1px; background:#d6bd96; margin:0 auto 26px; position:relative; }
+.thin-rule span { position:absolute; background:var(--ivory); color:var(--gold); left:50%; top:50%; transform:translate(-50%,-50%); padding:0 10px; font-size:12px; }
+.hero h1 { font-family:"Cormorant Garamond",serif; font-size:clamp(58px,14vw,86px); line-height:.82; font-weight:500; letter-spacing:-.04em; color:var(--maroon); margin:12px 0 18px; }
+.hero h1 em { font-family:"Great Vibes",cursive; font-size:.62em; color:var(--gold); font-weight:400; }
+.hero-script { font-family:"Great Vibes",cursive; font-size:28px; color:var(--wine); margin:5px 0 15px; }
+.hero-flower { font-size:27px; color:var(--gold); margin:0 0 15px; }
+.invitation-copy { max-width:340px; font-family:"Cormorant Garamond",serif; font-size:19px; line-height:1.5; color:#715a55; margin:0 auto 38px; }
+.scroll-cue { color:var(--wine); font-size:9px; letter-spacing:.2em; text-decoration:none; }
+.scroll-cue span { display:block; font-size:19px; margin-top:8px; animation:bob 1.5s infinite; }
+.date-section { background:var(--maroon); color:var(--ivory); }
+.date-section .eyebrow { color:#dfc59a; }
+h2 { font-family:"Cormorant Garamond",serif; font-weight:500; font-size:clamp(34px,8vw,48px); line-height:1.05; margin:0 0 30px; }
+.date-card { width:min(100%,340px); margin:0 auto; border:1px solid #c6a36d; padding:19px 13px; display:grid; grid-template-columns:1fr 1.6fr 1fr; align-items:center; gap:4px; position:relative; }
+.date-card:before { content:""; position:absolute; inset:5px; border:1px solid #c6a36d66; pointer-events:none; }
+.date-side { font-size:8px; letter-spacing:.15em; line-height:1.7; color:#e2cba5; }
+.date-main { display:flex; flex-direction:column; align-items:center; color:#fff7e9; }
+.date-main span { font-size:9px; letter-spacing:.2em; }
+.date-main strong { font-family:"Cormorant Garamond",serif; font-size:72px; font-weight:400; line-height:1.02; }
+.date-note { font-family:"Cormorant Garamond",serif; font-style:italic; font-size:18px; color:#ead7ba; margin:23px 0 42px; }
+.countdown-title { font-size:9px; letter-spacing:.18em; color:#dfc59a; margin-bottom:18px; }
+.countdown { display:grid; grid-template-columns:repeat(4,1fr); max-width:360px; margin:auto; gap:8px; }
+.countdown div { border-top:1px solid #b98d65; padding-top:13px; display:flex; flex-direction:column; gap:5px; }
+.countdown strong { font-family:"Cormorant Garamond",serif; font-size:30px; font-weight:500; }
+.countdown span { font-size:8px; letter-spacing:.12em; color:#e2cba5; }
+.venue-section { background:#f6eadb; }
+.venue-icon { width:48px; height:48px; border:1px solid var(--gold); color:var(--maroon); border-radius:50%; display:grid; place-items:center; font-size:24px; margin:0 auto 20px; }
+.venue-name { font-family:"Cormorant Garamond",serif; font-size:29px; color:var(--maroon); margin:0 0 9px; }
+.venue-address { line-height:1.8; color:#765e57; font-size:14px; }
+.venue-time { font-size:11px; color:var(--wine); margin:22px 0 25px; }
+.rsvp-section { background:var(--paper); }
+.rsvp-copy { font-family:"Cormorant Garamond",serif; font-size:19px; line-height:1.5; color:#765e57; max-width:340px; margin:-10px auto 27px; }
+.rsvp-buttons { display:flex; flex-direction:column; gap:12px; max-width:300px; margin:auto; }
+.rsvp-note { color:var(--muted); font-size:11px; line-height:1.5; margin:18px auto 8px; max-width:300px; min-height:18px; }
+.text-btn { border:0; background:none; color:var(--wine); text-decoration:underline; text-underline-offset:4px; padding:12px; font-size:11px; }
+.closing { background:var(--deep); color:var(--ivory); padding-top:70px; padding-bottom:42px; }
+.closing-ornament { font-size:40px; margin-bottom:20px; }
+.arabic { font-size:20px; line-height:2; color:#ead5ad; max-width:360px; margin:0 auto 15px; }
+.closing-translation { font-family:"Cormorant Garamond",serif; font-size:18px; line-height:1.5; font-style:italic; color:#e3d0c1; max-width:330px; margin:0 auto 29px; }
+.closing .thin-rule span { background:var(--deep); }
+.closing h2 { font-size:27px; margin-bottom:7px; color:#e8d8c2; }
+.closing-names { font-family:"Cormorant Garamond",serif; font-size:32px; color:#fff6e8; margin:0 0 9px; }
+.closing-date { font-size:10px; letter-spacing:.25em; color:#d3b887; }
+.footer-note { font-size:8px; letter-spacing:.22em; color:#a98778; margin:48px 0 0; }
+@keyframes fadeIn { from {opacity:0; transform:translateY(12px)} to {opacity:1;transform:translateY(0)} }
+@keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
+@media (min-width:700px) {
+  .section-pad { padding:100px 30px; }
+  .hero { min-height:760px; }
+  .rsvp-buttons { flex-direction:row; max-width:none; justify-content:center; }
+  .rsvp-buttons > * { min-width:190px; }
+  .intro-flower { font-size:130px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  *,*::before,*::after { scroll-behavior:auto !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+}
