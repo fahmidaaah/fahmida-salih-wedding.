@@ -60,10 +60,20 @@
       <section class="date-section section-pad" id="details">
         <p class="eyebrow">SAVE THE DATE</p>
         <h2>A day to remember</h2>
-        <div class="date-card">
-          <div class="date-side"><span class="side-icon">✧</span><span>MON</span><span>DAY</span></div>
-          <div class="date-main"><span class="month-label">NOVEMBER</span><strong>23</strong><span class="year-label">2026</span></div>
-          <div class="date-side"><span class="side-icon">✧</span><span>10:30</span><span>AM</span></div>
+        <div class="date-reveal-stage" id="dateRevealStage">
+          <div class="date-reveal-card" id="dateRevealCard" role="button" tabindex="0" aria-label="Swipe or tap to reveal the wedding date">
+            <span class="reveal-card-top-mark">✧</span>
+            <span class="reveal-card-script">Our Special Day</span>
+            <span class="reveal-card-caption">IS HERE</span>
+            <span class="reveal-card-seal">✿</span>
+            <span class="swipe-prompt"><span class="swipe-hand">☝</span> SWIPE TO REVEAL <span>›</span></span>
+          </div>
+          <div class="date-reveal-glow" aria-hidden="true"></div>
+          <div class="date-card revealed-date" id="revealedDate" aria-hidden="true">
+            <div class="date-side"><span class="side-icon">✧</span><span>MON</span><span>DAY</span></div>
+            <div class="date-main"><span class="month-label">NOVEMBER</span><strong>23</strong><span class="year-label">2026</span></div>
+            <div class="date-side"><span class="side-icon">✧</span><span>10:30</span><span>AM</span></div>
+          </div>
         </div>
         <p class="date-note">A new chapter begins, in shaa Allah.</p>
         <div class="countdown-title">COUNTING DOWN TO OUR NIKAH</div>
@@ -99,8 +109,6 @@
           <button class="primary-btn" id="yesBtn">Yes, In shaa Allah! ♡</button>
           <button class="outline-btn" id="noBtn">Sorry, I can't make it</button>
         </div>
-        <p class="rsvp-note" id="rsvpNote" aria-live="polite">We would be delighted to celebrate with you.</p>
-        <button class="text-btn" id="shareBtn">Share this invitation ↗</button>
       </section>
 
       <section class="closing section-pad">
