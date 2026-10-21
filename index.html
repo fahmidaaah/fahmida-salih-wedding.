@@ -8,15 +8,18 @@
   <title>Fahmida & Salih | Wedding Invitation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="grain"></div>
+  <button class="music-toggle" id="musicToggle" aria-label="Play background music" title="Play music">♫ <span id="musicLabel">Play music</span></button>
+  <audio id="weddingMusic" src="wedding-music.mp3" loop preload="none"></audio>
   <main>
     <section class="intro" id="intro" aria-label="Open invitation">
       <div class="intro-flower flower-one">❧</div>
       <div class="intro-flower flower-two">❦</div>
+      <div class="intro-top-mark" aria-hidden="true"><span>✦</span><i>❦</i><span>✦</span></div>
       <p class="eyebrow">WITH LOVE & BLESSINGS</p>
       <div class="envelope-wrap">
         <div class="envelope" id="envelope">
@@ -35,7 +38,9 @@
       </div>
       <p class="intro-names">Fahmida <span>&</span> Salih</p>
       <p class="intro-hint">A little invitation, made with love</p>
+      <p class="intro-date"><span>23</span> NOVEMBER <span>2026</span> <b>·</b> 10:30 AM</p>
       <button class="primary-btn open-btn" id="openBtn">Open Invitation <span>✧</span></button>
+      <p class="intro-bottom-note">A BEAUTIFUL BEGINNING, IN SHAA ALLAH</p>
     </section>
 
     <div id="invitation" class="invitation hidden">
@@ -56,9 +61,9 @@
         <p class="eyebrow">SAVE THE DATE</p>
         <h2>A day to remember</h2>
         <div class="date-card">
-          <div class="date-side">MONDAY</div>
-          <div class="date-main"><span>NOVEMBER</span><strong>23</strong><span>2026</span></div>
-          <div class="date-side">10:30 AM</div>
+          <div class="date-side"><span class="side-icon">✧</span><span>MON</span><span>DAY</span></div>
+          <div class="date-main"><span class="month-label">NOVEMBER</span><strong>23</strong><span class="year-label">2026</span></div>
+          <div class="date-side"><span class="side-icon">✧</span><span>10:30</span><span>AM</span></div>
         </div>
         <p class="date-note">A new chapter begins, in shaa Allah.</p>
         <div class="countdown-title">COUNTING DOWN TO OUR NIKAH</div>
@@ -72,35 +77,39 @@
 
       <section class="venue-section section-pad">
         <p class="eyebrow">JOIN US FOR OUR NIKAH</p>
-        <div class="venue-icon">⌖</div>
-        <h2>Where we begin</h2>
+        <h2 class="section-display-title">Venue</h2>
+        <a class="venue-map-art" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Sabha+Hall%2C+1st+Mail%2C+Kizhisseri%2C+Malappuram" aria-label="Open Sabha Hall in Google Maps">
+          <span class="map-pin">♥</span>
+          <span class="map-label">L O C A T I O N</span>
+          <svg class="map-lines" viewBox="0 0 260 112" aria-hidden="true"><path d="M8 90 L80 48 L245 70 M20 22 L95 98 L128 8 M63 112 L118 34 L250 12 M5 62 L255 44 M158 110 L145 4"/><circle cx="91" cy="53" r="12"/><circle cx="91" cy="53" r="4"/></svg>
+          <span class="map-caption">Tap to open location in Google Maps ↗</span>
+        </a>
         <p class="venue-name">Sabha Hall</p>
         <p class="venue-address">1st Mail, Kizhisseri<br>Malappuram, Kerala</p>
-        <p class="venue-time">Monday, 23 November 2026 · 10:30 AM</p>
-        <a class="outline-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Sabha+Hall%2C+1st+Mail%2C+Kizhisseri%2C+Malappuram">Open in Google Maps ↗</a>
+        <p class="venue-time">MONDAY · 23 NOVEMBER 2026 · 10:30 AM</p>
+        <a class="outline-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Sabha+Hall%2C+1st+Mail%2C+Kizhisseri%2C+Malappuram">Get Directions ↗</a>
       </section>
 
       <section class="rsvp-section section-pad">
-        <p class="eyebrow">YOUR PRESENCE IS OUR PRESENT</p>
-        <h2>Will you join us?</h2>
-        <p class="rsvp-copy">It would mean the world to have you with us as we begin this beautiful journey.</p>
+        <div class="rsvp-flower" aria-hidden="true">✦ ❧ ✦</div>
+        <p class="eyebrow">KINDLY REPLY</p>
+        <h2 class="section-display-title">RSVP</h2>
+        <p class="rsvp-question">Will you be joining us?</p>
         <div class="rsvp-buttons">
-          <button class="primary-btn" id="yesBtn">Yes, In shaa Allah ♡</button>
-          <button class="outline-btn" id="noBtn">Unable to attend</button>
+          <button class="primary-btn" id="yesBtn">Yes, In shaa Allah! ♡</button>
+          <button class="outline-btn" id="noBtn">Sorry, I can't make it</button>
         </div>
-        <p class="rsvp-note" id="rsvpNote" aria-live="polite">Choose an option to prepare your RSVP message.</p>
+        <p class="rsvp-note" id="rsvpNote" aria-live="polite">We would be delighted to celebrate with you.</p>
         <button class="text-btn" id="shareBtn">Share this invitation ↗</button>
       </section>
 
       <section class="closing section-pad">
         <div class="closing-ornament">❦</div>
-        <p class="arabic">بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
-        <p class="closing-translation">May Allah bless you, shower His blessings upon you, and unite you both in goodness.</p>
+        <p class="arabic-calligraphy" lang="ar" dir="rtl">إِنْ شَاءَ اللّٰهُ</p>
+        <p class="closing-translation">In shaa Allah</p>
         <div class="thin-rule"><span>✦</span></div>
-        <h2>With love,</h2>
         <p class="closing-names">Fahmida <span>&</span> Salih</p>
         <p class="closing-date">23 · 11 · 2026</p>
-        <p class="footer-note">MADE WITH LOVE & DUAS</p>
       </section>
     </div>
   </main>

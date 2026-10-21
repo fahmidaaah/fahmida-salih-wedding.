@@ -76,3 +76,27 @@ document.getElementById("shareBtn").addEventListener("click", async () => {
     window.prompt("Copy this invitation:", shareData.text + " " + shareData.url);
   }
 });
+
+// Background music: upload your own licensed audio file as wedding-music.mp3
+const music = document.getElementById("weddingMusic");
+const musicToggle = document.getElementById("musicToggle");
+const musicLabel = document.getElementById("musicLabel");
+if (music && musicToggle && musicLabel) {
+  musicToggle.addEventListener("click", async () => {
+    if (music.paused) {
+      try {
+        await music.play();
+        musicLabel.textContent = "Pause music";
+        musicToggle.setAttribute("aria-label", "Pause background music");
+      } catch (error) {
+        musicLabel.textContent = "Music unavailable";
+        const note = document.getElementById("rsvpNote");
+        if (note) note.textContent = "Please upload an audio file named wedding-music.mp3 to the repository root, then refresh this page.";
+      }
+    } else {
+      music.pause();
+      musicLabel.textContent = "Play music";
+      musicToggle.setAttribute("aria-label", "Play background music");
+    }
+  });
+}
