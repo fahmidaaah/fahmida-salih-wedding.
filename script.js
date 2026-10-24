@@ -1,196 +1,22 @@
-const intro = document.getElementById("intro");
-const invitation = document.getElementById("invitation");
-const openBtn = document.getElementById("openBtn");
-
-openBtn.addEventListener("click", () => {
-  intro.classList.add("opened");
-  openBtn.disabled = true;
-  openBtn.textContent = "Opening with love…";
-  window.setTimeout(() => {
-    intro.style.display = "none";
-    invitation.classList.remove("hidden");
-    window.scrollTo({ top: 0, behavior: "auto" });
-    initScrollReveal();
-  }, 950);
-});
-
-const weddingDate = new Date("2026-11-23T10:30:00+05:30").getTime();
-function updateCountdown() {
-  const now = Date.now();
-  let diff = weddingDate - now;
-  if (diff <= 0) {
-    document.getElementById("days").textContent = "00";
-    document.getElementById("hours").textContent = "00";
-    document.getElementById("minutes").textContent = "00";
-    document.getElementById("seconds").textContent = "00";
-    document.querySelector(".countdown-title").textContent = "TODAY IS OUR SPECIAL DAY";
-    return;
-  }
-  const days = Math.floor(diff / 86400000); diff %= 86400000;
-  const hours = Math.floor(diff / 3600000); diff %= 3600000;
-  const minutes = Math.floor(diff / 60000); diff %= 60000;
-  const seconds = Math.floor(diff / 1000);
-  document.getElementById("days").textContent = String(days).padStart(2, "0");
-  document.getElementById("hours").textContent = String(hours).padStart(2, "0");
-  document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
-  document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
-}
-updateCountdown();
-setInterval(updateCountdown, 1000);
-
-// Swipe / drag the parchment envelope to reveal the wedding date with a soft, physical motion.
-const dateRevealStage = document.getElementById("dateRevealStage");
-const dateRevealCard = document.getElementById("dateRevealCard");
-const revealedDate = document.getElementById("revealedDate");
-if (dateRevealStage && dateRevealCard && revealedDate) {
-  let startX = 0, startY = 0, dragX = 0, dragging = false, revealed = false, moved = false;
-  const resetCard = () => {
-    dateRevealCard.style.transition = "transform .72s cubic-bezier(.2,.85,.2,1), filter .5s ease";
-    dateRevealCard.style.transform = "translate3d(0,0,0) rotate(0deg) scale(1)";
-    dateRevealCard.style.filter = "brightness(1)";
-    window.setTimeout(() => { if (!revealed) dateRevealCard.style.transition = ""; }, 740);
-  };
-  const revealWeddingDate = () => {
-    if (revealed) return;
-    revealed = true;
-    dateRevealCard.style.transition = "transform .9s cubic-bezier(.16,1,.3,1), opacity .65s ease, filter .65s ease";
-    dateRevealStage.classList.add("is-revealed");
-    revealedDate.setAttribute("aria-hidden", "false");
-    dateRevealCard.setAttribute("aria-label", "Wedding date revealed: November 23, 2026 at 10:30 AM");
-    showerPetals();
-    window.setTimeout(() => { dateRevealCard.style.display = "none"; }, 950);
-  };
-  dateRevealCard.addEventListener("pointerdown", (event) => {
-    if (revealed) return;
-    dragging = true; moved = false; startX = event.clientX; startY = event.clientY; dragX = 0;
-    dateRevealCard.style.transition = "none";
-    dateRevealCard.style.cursor = "grabbing";
-    if (dateRevealCard.setPointerCapture) dateRevealCard.setPointerCapture(event.pointerId);
-  });
-  dateRevealCard.addEventListener("pointermove", (event) => {
-    if (!dragging || revealed) return;
-    const dx = event.clientX - startX, dy = event.clientY - startY;
-    if (Math.abs(dx) > 5) moved = true;
-    // A sideways swipe peels the card away; vertical page scrolling stays native and smooth.
-    if (Math.abs(dx) > Math.abs(dy) * 1.05 && Math.abs(dx) > 4) {
-      event.preventDefault();
-      dragX = dx;
-      const rotate = Math.max(-7, Math.min(7, dx / 22));
-      const scale = Math.max(.965, 1 - Math.abs(dx) / 1800);
-      dateRevealCard.style.transform = `translate3d(${dx}px, ${Math.min(8, Math.abs(dx) * .025)}px, 0) rotate(${rotate}deg) scale(${scale})`;
-      dateRevealCard.style.filter = `brightness(${1 + Math.min(.1, Math.abs(dx) / 900)})`;
-    }
-  }, { passive: false });
-  const finishSwipe = () => {
-    if (!dragging) return;
-    dragging = false;
-    dateRevealCard.style.cursor = "grab";
-    if (Math.abs(dragX) > Math.min(90, window.innerWidth * .22)) {
-      revealWeddingDate();
-    } else {
-      resetCard();
-    }
-  };
-  dateRevealCard.addEventListener("pointerup", finishSwipe);
-  dateRevealCard.addEventListener("pointercancel", finishSwipe);
-  dateRevealCard.addEventListener("click", (event) => {
-    if (revealed) return;
-    // Tap works too; suppress the synthetic click after an actual drag.
-    if (moved) { moved = false; return; }
-    revealWeddingDate();
-  });
-  dateRevealCard.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault(); revealWeddingDate();
-    }
-  });
-}
-
-// RSVP buttons are purely decorative interactions: show a brief falling-petal celebration.
-function showerPetals() {
-  const layer = document.createElement("div");
-  layer.className = "petal-shower";
-  layer.setAttribute("aria-hidden", "true");
-  document.body.appendChild(layer);
-  const petals = ["🌸", "🌷", "✿", "❀", "🌺"];
-  for (let i = 0; i < 28; i++) {
-    const petal = document.createElement("span");
-    petal.className = "falling-petal";
-    petal.textContent = petals[Math.floor(Math.random() * petals.length)];
-    petal.style.left = `${Math.random() * 100}%`;
-    petal.style.animationDelay = `${Math.random() * 0.9}s`;
-    petal.style.animationDuration = `${2.4 + Math.random() * 2}s`;
-    petal.style.setProperty("--drift", `${Math.round(Math.random() * 140 - 70)}px`);
-    petal.style.fontSize = `${16 + Math.random() * 17}px`;
-    layer.appendChild(petal);
-  }
-  window.setTimeout(() => layer.remove(), 5200);
-}
-document.getElementById("yesBtn").addEventListener("click", showerPetals);
-document.getElementById("noBtn").addEventListener("click", showerPetals);
-
-// Background music: upload your own licensed audio file as wedding-music.mp3
-const music = document.getElementById("weddingMusic");
-const musicToggle = document.getElementById("musicToggle");
-const musicLabel = document.getElementById("musicLabel");
-if (music && musicToggle && musicLabel) {
-  musicToggle.addEventListener("click", async () => {
-    if (music.paused) {
-      try {
-        await music.play();
-        musicLabel.textContent = "Pause music";
-        musicToggle.setAttribute("aria-label", "Pause background music");
-      } catch (error) {
-        musicLabel.textContent = "Music unavailable";
-      }
-    } else {
-      music.pause();
-      musicLabel.textContent = "Play music";
-      musicToggle.setAttribute("aria-label", "Play background music");
-    }
-  });
-}
-
-
-// Subtle scroll reveals: content remains readable if the browser lacks IntersectionObserver.
-function initScrollReveal() {
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduceMotion || !("IntersectionObserver" in window)) return;
-
-  const sections = document.querySelectorAll("#invitation > section");
-  sections.forEach((section) => {
-    const items = Array.from(section.children).filter((el) => {
-      return !el.classList.contains("map-lines") && el.tagName !== "SCRIPT";
-    });
-    items.forEach((item) => item.classList.add("reveal-item"));
-  });
-
-  document.documentElement.classList.add("reveal-ready");
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: "0px 0px -35px 0px" });
-
-  document.querySelectorAll("#invitation .reveal-item").forEach((item) => {
-    const rect = item.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.9) {
-      item.classList.add("is-visible");
-    } else {
-      observer.observe(item);
-    }
-  });
-}
-
-// Prevent rapid repeated taps on anchor links from feeling abrupt on mobile.
-document.querySelectorAll('a[href^="#"]').forEach((link) => {
-  link.addEventListener("click", (event) => {
-    const target = document.querySelector(link.getAttribute("href"));
-    if (!target) return;
-    event.preventDefault();
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
-});
+const opening=document.getElementById('opening');
+const invitation=document.getElementById('invitation');
+const openButton=document.getElementById('openInvitation');
+const openText=document.getElementById('openText');
+let invitationOpened=false;
+function openInvite(){if(invitationOpened)return;invitationOpened=true;openButton.classList.add('open');openText.textContent='OPENING WITH LOVE…';setTimeout(()=>{opening.classList.add('opening-away');opening.style.transition='opacity .8s ease, transform .9s ease';opening.style.opacity='0';opening.style.transform='scale(1.025)';setTimeout(()=>{opening.style.display='none';invitation.classList.remove('is-hidden');window.scrollTo({top:0,behavior:'instant'});initReveal();},760);},750)}
+openButton.addEventListener('click',openInvite);openText.addEventListener('click',openInvite);
+const weddingDate=new Date('2026-11-23T10:30:00+05:30').getTime();
+function countdown(){let d=Math.max(0,weddingDate-Date.now());const vals=[Math.floor(d/86400000),Math.floor(d%86400000/3600000),Math.floor(d%3600000/60000),Math.floor(d%60000/1000)];['days','hours','minutes','seconds'].forEach((id,i)=>document.getElementById(id).textContent=String(vals[i]).padStart(2,'0'));}
+countdown();setInterval(countdown,1000);
+// A real scratch-to-reveal layer, matching the reference invitation interaction.
+const canvas=document.getElementById('scratchCanvas'),ctx=canvas.getContext('2d'),scratchWrap=document.getElementById('scratchWrap');let scratching=false,hasRevealed=false,lastPoint=null;
+function paintScratch(){const rect=scratchWrap.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.round(rect.width*dpr);canvas.height=Math.round(rect.height*dpr);canvas.style.width=rect.width+'px';canvas.style.height=rect.height+'px';ctx.setTransform(dpr,0,0,dpr,0,0);const g=ctx.createLinearGradient(0,0,rect.width,rect.height);g.addColorStop(0,'#fffaf0');g.addColorStop(.5,'#ead6b9');g.addColorStop(1,'#d8bd91');ctx.fillStyle=g;ctx.fillRect(0,0,rect.width,rect.height);ctx.strokeStyle='#c3a36f';ctx.lineWidth=1;ctx.strokeRect(12,12,rect.width-24,rect.height-24);ctx.fillStyle='#8a1e37';ctx.font='italic 30px "Great Vibes", cursive';ctx.textAlign='center';ctx.fillText('Our Special Day',rect.width/2,rect.height/2-25);ctx.fillStyle='#8c6a51';ctx.font='10px "DM Sans", sans-serif';ctx.fillText('SWIPE TO REVEAL',rect.width/2,rect.height/2+14);ctx.fillStyle='#b08d55';ctx.font='26px serif';ctx.fillText('✿',rect.width/2,rect.height/2+54);}
+function scratchAt(e){const r=canvas.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;ctx.globalCompositeOperation='destination-out';ctx.lineWidth=42;ctx.lineCap='round';ctx.lineJoin='round';if(lastPoint){ctx.beginPath();ctx.moveTo(lastPoint.x,lastPoint.y);ctx.lineTo(x,y);ctx.stroke()}else{ctx.beginPath();ctx.arc(x,y,22,0,Math.PI*2);ctx.fill()}lastPoint={x,y};const img=ctx.getImageData(0,0,canvas.width,canvas.height).data;let clear=0;for(let i=3;i<img.length;i+=32)if(img[i]<30)clear++;if(clear/(img.length/32)>.38)revealDate();}
+function revealDate(){if(hasRevealed)return;hasRevealed=true;scratchWrap.classList.add('revealed');showerRosePetals(24);}
+canvas.addEventListener('pointerdown',e=>{if(hasRevealed)return;scratching=true;lastPoint=null;canvas.setPointerCapture?.(e.pointerId);scratchAt(e)});canvas.addEventListener('pointermove',e=>{if(scratching&&!hasRevealed){e.preventDefault();scratchAt(e)}},{passive:false});function stopScratch(){scratching=false;lastPoint=null}canvas.addEventListener('pointerup',stopScratch);canvas.addEventListener('pointercancel',stopScratch);canvas.addEventListener('click',()=>{if(!hasRevealed){for(let i=0;i<5;i++)scratchAt({clientX:canvas.getBoundingClientRect().left+canvas.clientWidth*(.35+Math.random()*.3),clientY:canvas.getBoundingClientRect().top+canvas.clientHeight*(.35+Math.random()*.3)});}});
+function showerRosePetals(count=20){const layer=document.querySelector('.ambient-petals');for(let i=0;i<count;i++){const p=document.createElement('span');p.className='rose-petal';p.style.left=Math.random()*100+'%';p.style.setProperty('--duration',(3.3+Math.random()*2.4)+'s');p.style.setProperty('--drift',Math.round(Math.random()*220-110)+'px');p.style.setProperty('--rotation',Math.round(Math.random()*360)+'deg');p.style.width=(10+Math.random()*10)+'px';p.style.height=(16+Math.random()*13)+'px';p.style.animationDelay=(Math.random()*.8)+'s';layer.appendChild(p);setTimeout(()=>p.remove(),6500)} }
+document.getElementById('yesBtn').addEventListener('click',()=>{const el=document.getElementById('rsvpResponse');el.textContent='Yay! Can’t wait to celebrate with you 🌹';el.classList.add('show');showerRosePetals(30)});
+document.getElementById('noBtn').addEventListener('click',()=>{const el=document.getElementById('rsvpResponse');el.textContent='You will be missed. Keep us in your duas ♡';el.classList.add('show');showerRosePetals(18)});
+const music=document.getElementById('weddingMusic'),musicToggle=document.getElementById('musicToggle');musicToggle.addEventListener('click',async()=>{if(music.paused){try{await music.play();musicToggle.textContent='♫';musicToggle.classList.add('playing')}catch(e){musicToggle.textContent='♪'}}else{music.pause();musicToggle.classList.remove('playing')}});
+function initReveal(){const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||!('IntersectionObserver'in window))return;const sections=document.querySelectorAll('.page-section');sections.forEach(s=>Array.from(s.children).forEach(c=>{if(!c.classList.contains('reveal-item')&&c.tagName!=='CANVAS')c.classList.add('reveal-item')}));const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.12,rootMargin:'0px 0px -30px 0px'});document.querySelectorAll('.reveal-item').forEach(el=>{if(el.getBoundingClientRect().top<innerHeight*.9)el.classList.add('visible');else observer.observe(el)});paintScratch();}
+window.addEventListener('resize',()=>{if(!invitation.classList.contains('is-hidden')&&!hasRevealed)paintScratch()});document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const target=document.querySelector(a.getAttribute('href'));if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'})}}));
