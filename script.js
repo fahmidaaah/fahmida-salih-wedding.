@@ -5,6 +5,8 @@ const openText=document.getElementById('openText');
 let invitationOpened=false;
 function openInvite(){if(invitationOpened)return;invitationOpened=true;openButton.classList.add('open');openText.textContent='OPENING WITH LOVE…';setTimeout(()=>{opening.classList.add('opening-away');opening.style.transition='opacity .8s ease, transform .9s ease';opening.style.opacity='0';opening.style.transform='scale(1.025)';setTimeout(()=>{opening.style.display='none';invitation.classList.remove('is-hidden');window.scrollTo({top:0,behavior:'instant'});initReveal();},760);},750)}
 openButton.addEventListener('click',openInvite);openText.addEventListener('click',openInvite);
+// The envelope is the only first-screen control; tapping the wax seal opens the invitation.
+openButton.setAttribute('aria-label','Tap the wax seal to open the wedding invitation');
 const weddingDate=new Date('2026-11-23T10:30:00+05:30').getTime();
 function countdown(){let d=Math.max(0,weddingDate-Date.now());const vals=[Math.floor(d/86400000),Math.floor(d%86400000/3600000),Math.floor(d%3600000/60000),Math.floor(d%60000/1000)];['days','hours','minutes','seconds'].forEach((id,i)=>document.getElementById(id).textContent=String(vals[i]).padStart(2,'0'));}
 countdown();setInterval(countdown,1000);
