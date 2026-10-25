@@ -44,3 +44,32 @@
 .scratch-hint small{font-size:9px;letter-spacing:.24em;background:#f7ead7d9;padding:5px 9px}
 .scratch-wrap.revealed .scratch-hint{opacity:0}
 @media(max-width:380px){.date-day{left:7px}.date-time{right:7px}.date-day,.date-time{font-size:8px;letter-spacing:.12em}.date-underlay strong{font-size:98px}}
+
+
+/* Reference-inspired full-screen floral envelope opening */
+.opening{min-height:100svh;height:100svh;padding:0;justify-content:center;background:linear-gradient(145deg,#f7e8d2 0%,#f9efdf 45%,#ead8bd 100%);overflow:hidden}
+.opening-frame{inset:10px;border:1px solid rgba(184,154,97,.48);border-radius:2px}
+.opening-kicker,.opening-names,.opening-sub,.open-link,.opening-foot{display:none!important}
+.envelope-scene{position:absolute;inset:0;width:100%;height:100%;max-width:none;margin:0;border-radius:0;filter:none;perspective:1400px}
+.envelope-body{inset:0;border:0;border-radius:0;background:linear-gradient(145deg,#f9edda 0%,#e7d2b4 100%);clip-path:none}
+.envelope-body:before{inset:12px;border:1px solid rgba(177,139,79,.5);background:linear-gradient(32deg,transparent 49.7%,rgba(191,163,119,.6) 50%,transparent 50.3%),linear-gradient(-32deg,transparent 49.7%,rgba(191,163,119,.6) 50%,transparent 50.3%)}
+.envelope-body:after{inset:0;background:linear-gradient(32deg,transparent 49.6%,#d9c19e 49.9%,#fff4df 50.1%,transparent 50.4%),linear-gradient(-32deg,transparent 49.6%,#d9c19e 49.9%,#fff4df 50.1%,transparent 50.4%);opacity:.9}
+.envelope-paper{left:0;right:0;top:0;height:55%;border:0;background:linear-gradient(180deg,#f8e9d4,#f7e8d3);clip-path:polygon(0 0,100% 0,100% 100%,50% 100%,0 100%);z-index:2;justify-content:flex-end;padding-bottom:20%;gap:8px;opacity:.98}
+.paper-sprig{font-size:clamp(32px,8vw,54px);color:#b89a61}
+.paper-top{font-size:10px;letter-spacing:.3em}
+.paper-monogram{font-size:clamp(38px,10vw,60px)}
+.paper-date{font-size:10px}
+.envelope-flap{inset:0 0 auto;height:56%;background:linear-gradient(160deg,#fff2dd,#f1dfc5);clip-path:polygon(0 0,100% 0,50% 100%);z-index:4;filter:drop-shadow(0 3px 2px #9c795344)}
+.envelope-seal{width:clamp(112px,30vw,168px);height:clamp(112px,30vw,168px);top:52%;border-radius:42% 42% 45% 45%;border:5px solid #7b2638;outline:2px solid #b98c61;outline-offset:-12px;background:radial-gradient(circle at 30% 22%,#a74a5b,#68182d 65%,#4a1020);box-shadow:0 8px 16px #4d132e44,inset 0 0 0 2px #c9a36b;font-size:clamp(46px,13vw,72px);color:#f5dca7;z-index:6}
+.envelope-seal:after{content:'♡';position:absolute;font-family:'Cormorant Garamond',serif;font-size:1.12em;font-weight:400;color:#f3d8a2}
+.envelope-seal{font-size:0}
+.corner-bloom{position:absolute;z-index:7;pointer-events:none;font-size:clamp(58px,18vw,112px);line-height:1;color:#7d1930;text-shadow:15px 13px 0 #f3e1c4,27px 26px 0 #a42c42,38px 34px 0 #b9a17b;opacity:.95}
+.bloom-a{top:1%;left:-5%;transform:rotate(-25deg)}.bloom-b{top:1%;right:-5%;transform:rotate(25deg) scaleX(-1)}
+.opening:before,.opening:after{content:'✿  ❀  ✿';font-size:clamp(32px,9vw,58px);opacity:.75;filter:none;color:#7c1c31;z-index:8;letter-spacing:-.3em;text-shadow:0 0 0 #7c1c31,18px 12px 0 #f8efe1,28px 18px 0 #b99c70}
+.opening:before{top:auto;bottom:1%;left:-2%;transform:rotate(20deg)}.opening:after{bottom:1%;right:-2%;transform:rotate(-20deg) scaleX(-1)}
+/* Keep the reveal page focused: the scratch card is the only interactive focal point. */
+.reveal-section{min-height:100svh;justify-content:center;padding-top:72px;padding-bottom:78px}
+.reveal-section .section-kicker{margin-top:0}
+.scratch-wrap{touch-action:pan-y;}
+.scratch-hint{pointer-events:none}
+@media(max-width:480px){.reveal-section{padding-left:22px;padding-right:22px}.scratch-wrap{width:100%;max-width:580px;aspect-ratio:1.12}.reveal-note{font-size:clamp(22px,6vw,30px)}}
