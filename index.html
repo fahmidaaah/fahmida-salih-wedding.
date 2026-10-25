@@ -1,54 +1,56 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#eee4d0"><title>Fahmida & Salih — Wedding Invitation</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<a class="sound" href="#" id="soundToggle" aria-label="Toggle music">♫</a>
-<div class="progress" id="progress"></div>
-<main>
-<section class="screen envelope-screen" id="home" aria-label="Open invitation">
-  <div class="petal p1">✿</div><div class="petal p2">✽</div><div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Open wedding invitation">
-    <div class="env-back"></div><div class="env-flap"></div><div class="env-left"></div><div class="env-right"></div><div class="env-bottom"></div>
-    <div class="seal"><span>F <i>&</i> S</span><small>OPEN INVITATION</small></div>
-  </div>
-  <p class="tap-hint">TAP THE SEAL TO OPEN</p>
-  <div class="corner-flowers">❧</div>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f7eee0"><meta name="description" content="Fahmida and Salih's wedding invitation — 23 November 2026"><title>Fahmida & Salih | Wedding Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
+</head><body>
+<div class="ambient-petals" aria-hidden="true"></div>
+<button class="music-toggle" id="musicToggle" aria-label="Play wedding music">♫</button><audio id="weddingMusic" src="wedding-music.mp3" loop preload="none"></audio>
+<section class="opening" id="opening" aria-label="Open wedding invitation">
+  <div class="opening-frame"></div><div class="corner-bloom bloom-a">✿</div><div class="corner-bloom bloom-b">✿</div>
+  <p class="opening-kicker">A LITTLE SOMETHING, MADE WITH LOVE</p>
+  <button class="envelope-scene" id="openInvitation" aria-label="Open invitation">
+    <div class="envelope-paper"><span class="paper-sprig">❧</span><span class="paper-top">YOU ARE INVITED</span><span class="paper-monogram">F <i>&</i> S</span><span class="paper-date">23 · 11 · 2026</span></div>
+    <div class="envelope-body"></div><div class="envelope-flap"></div><div class="envelope-seal">♡</div>
+  </button>
+  <p class="opening-names">Fahmida <i>&</i> Salih</p><p class="opening-sub">Our forever begins, in shaa Allah</p>
+  <button class="open-link" id="openText">OPEN INVITATION <span>↗</span></button>
+  <p class="opening-foot">WITH THE BLESSINGS OF ALLAH</p>
 </section>
-<section class="screen hero" id="invitation">
-  <div class="floral-top" aria-hidden="true">✿ ❀ ✿ ❀ ✿</div><div class="gold-line"></div>
-  <p class="eyebrow">TOGETHER WITH OUR FAMILIES</p>
-  <p class="intro">With grateful hearts, we invite you to celebrate the wedding of</p>
-  <h1><span>Fahmida</span><em>&</em><span>Salih</span></h1>
-  <p class="invitation-copy">A beautiful new chapter begins, and your presence will make our day even more special.</p>
-  <div class="ornament">❦</div><p class="small-caps">SAVE THE DATE</p>
-  <button class="scroll-cue" data-scroll="#reveal" aria-label="Continue">⌄</button>
-  <div class="floral-bottom" aria-hidden="true">❧</div>
-</section>
-<section class="screen reveal-section" id="reveal">
-  <p class="script-title">Reveal</p><p class="tracking">SCRATCH TO DISCOVER THE DATE</p>
-  <div class="scratch-wrap"><canvas id="scratchCanvas" aria-label="Scratch here to reveal the wedding date"></canvas><div class="scratch-under"><span>MONDAY</span><strong>23 <small>NOV</small></strong><span>2026</span></div><div class="scratch-instruction" id="scratchInstruction">✧ Scratch here ✧</div></div>
-  <div class="date-pills"><span>23<small>DAY</small></span><span>NOV<small>MONTH</small></span><span>2026<small>YEAR</small></span></div>
-  <div class="save-card"><div class="card-frame"><small>YOU ARE CORDIALLY INVITED</small><strong>Save the<br>date</strong><span>23 . 11 . 2026</span><i>Fahmida & Salih</i></div></div>
-  <button class="scroll-cue" data-scroll="#countdown" aria-label="Continue">⌄</button>
-</section>
-<section class="screen countdown-section" id="countdown">
-  <p class="script-title">Days to go</p><div class="countdown" id="countdownNumbers"><div><strong>00</strong><small>DAYS</small></div><div><strong>00</strong><small>HOURS</small></div><div><strong>00</strong><small>MINUTES</small></div><div><strong>00</strong><small>SECONDS</small></div></div>
-  <div class="detail-block"><span class="mini-flower">❀</span><p class="script-title">Nikah</p><strong class="time">11:30 AM</strong></div>
-  <div class="detail-block"><span class="mini-flower">♡</span><p class="script-title">Venue</p><a class="location-link" href="#venue" data-scroll="#venue"><span>⌖</span><small>LOCATION</small></a></div>
-  <button class="scroll-cue" data-scroll="#venue" aria-label="Continue">⌄</button>
-</section>
-<section class="screen venue-section" id="venue">
-  <p class="script-title">Location</p><div class="star-ornament">✧</div><p class="venue-note">Tap on the venue to see the location in Google Maps</p>
-  <a class="venue-name" href="https://maps.google.com/?q=wedding+venue" target="_blank" rel="noopener">Venue name <span>↗</span></a>
-  <div class="rsvp"><p class="script-title">RSVP</p><p>Will you be attending?</p><button id="yesBtn" class="rsvp-yes">Yes, I'll be there!</button><button id="noBtn" class="rsvp-no">Sorry, I can't make it</button><p id="rsvpMessage" class="rsvp-message" aria-live="polite"></p><small>Yay! Can't wait to celebrate with you ♡</small></div>
-  <div class="arabic" lang="ar">إِنْ شَاءَ ٱللَّٰهُ</div><div class="bouquet">❦<br>✿</div><p class="closing">WITH LOVE, FAHMIDA & SALIH</p>
-</section>
-<footer>Made with love · Fahmida & Salih · 23 November 2026</footer>
+<main id="invitation" class="invitation is-hidden">
+  <section class="hero page-section">
+    <div class="lace-top"></div><div class="floral-corner fc-left">✿</div><div class="floral-corner fc-right">✿</div>
+    <div class="hero-emblem">❦</div><p class="arabic bismillah-ar" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+    <p class="bismillah-en">IN THE NAME OF ALLAH<br>THE MOST GRACIOUS AND THE MOST MERCIFUL</p>
+    <div class="ornament-line"><span>✦</span></div>
+    <p class="invite-small">TOGETHER WITH OUR FAMILIES</p><h1>Fahmida <i>&</i><br>Salih</h1><p class="hero-heart">♡</p>
+    <p class="hero-message">With the blessings of Allah and our beloved families, we joyfully invite you to celebrate the beginning of our forever.</p>
+    <a href="#reveal" class="scroll-cue"><span class="scroll-icon">⌄</span><small>SCROLL TO EXPLORE</small></a>
+  </section>
+  <section class="reveal-section page-section" id="reveal">
+    <p class="section-kicker">A LITTLE SURPRISE</p><h2>Reveal</h2><p class="scratch-caption">SCRATCH TO DISCOVER THE DATE</p>
+    <div class="scratch-wrap" id="scratchWrap">
+      <div class="date-underlay"><span class="date-month">NOVEMBER</span><strong>23</strong><span class="date-year">2026</span><span class="date-day">MONDAY</span><span class="date-time">10:30 AM</span></div>
+      <canvas id="scratchCanvas" aria-label="Swipe or scratch to reveal wedding date"></canvas>
+      <div class="scratch-hint" id="scratchHint"><span>✧</span><small>SWIPE HERE</small></div>
+    </div>
+    <p class="reveal-note">A beautiful day, a blessed beginning ♡</p>
+  </section>
+  <section class="countdown-section page-section">
+    <p class="section-kicker">OUR SPECIAL DAY</p><h2>Days to Go</h2><p class="countdown-sub">Until we begin our forever</p>
+    <div class="countdown"><div><strong id="days">00</strong><span>DAYS</span></div><div><strong id="hours">00</strong><span>HOURS</span></div><div><strong id="minutes">00</strong><span>MINUTES</span></div><div><strong id="seconds">00</strong><span>SECS</span></div></div>
+    <div class="nikah-time"><span class="tiny-flower">♥</span><p>NIKKAH</p><strong>10:30 AM</strong><span class="tiny-flower">♥</span></div>
+  </section>
+  <section class="venue-section page-section">
+    <p class="section-kicker">CELEBRATE WITH US</p><h2>Venue</h2>
+    <a class="location-art" href="https://share.google/dfnha4yEMqCZf7LrT" target="_blank" rel="noopener" aria-label="Open venue in Google Maps"><span class="map-pin">♥</span><span class="location-label">L O C A T I O N</span><span class="map-flower">✳</span><span class="map-open">↗</span></a>
+    <p class="map-instruction">⌃ Click on the venue to see the location in Google Maps</p><h3>Sabha Hall Auditorium</h3><p class="venue-address">1st Mile, Kizhisseri<br>Malappuram, Kerala</p><p class="venue-date">MONDAY · 23 NOVEMBER 2026</p><a class="directions" href="https://share.google/dfnha4yEMqCZf7LrT" target="_blank" rel="noopener">VIEW LOCATION ↗</a>
+  </section>
+  <section class="rsvp-section page-section">
+    <p class="section-kicker">KINDLY REPLY</p><h2>RSVP</h2><p class="rsvp-question">Will you be attending?</p>
+    <div class="rsvp-buttons"><button class="yes-button" id="yesBtn">Yes, In shaa Allah! ♡</button><button class="no-button" id="noBtn">Sorry, I can't make it</button></div>
+    <p class="rsvp-response" id="rsvpResponse" aria-live="polite"></p>
+  </section>
+  <section class="closing page-section"><div class="closing-flower">✿</div><p class="arabic closing-ar" lang="ar" dir="rtl">إِنْ شَاءَ اللّٰهُ</p><p class="closing-caption">IN SHAA ALLAH</p><div class="closing-ornament">♡</div><p class="closing-names">Fahmida <i>&</i> Salih</p><p class="closing-date">23 · 11 · 2026</p><p class="made-with-love">created with love ♡</p></section>
 </main>
-<script src="script.js"></script>
-</body></html>
+<script src="script.js"></script></body></html>

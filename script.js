@@ -1,16 +1,40 @@
-const $=s=>document.querySelector(s);const $$=s=>document.querySelectorAll(s);
-const envelope=$('#envelope');
-function openInvite(){envelope.classList.add('open');setTimeout(()=>$('#invitation').scrollIntoView({behavior:'smooth'}),550)}
-envelope.addEventListener('click',openInvite);envelope.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openInvite()}});
-$$('[data-scroll]').forEach(b=>b.addEventListener('click',()=>$(b.dataset.scroll)?.scrollIntoView({behavior:'smooth'})));
-window.addEventListener('scroll',()=>{const max=document.documentElement.scrollHeight-innerHeight;$('#progress').style.width=(max>0?scrollY/max*100:0)+'%'});
-// Countdown to the wedding date, using the visitor's local clock.
-function updateCountdown(){const target=new Date(2026,10,23,11,30,0);let ms=Math.max(0,target-new Date());const vals=[Math.floor(ms/86400000),Math.floor(ms/3600000)%24,Math.floor(ms/60000)%60,Math.floor(ms/1000)%60];$('#countdownNumbers').innerHTML=vals.map((n,i)=>`<div><strong>${String(n).padStart(2,'0')}</strong><small>${['DAYS','HOURS','MINUTES','SECONDS'][i]}</small></div>`).join('')}
-updateCountdown();setInterval(updateCountdown,1000);
-// Interactive scratch-off: gold/wine foil is erased by touch or mouse.
-const canvas=$('#scratchCanvas'),ctx=canvas.getContext('2d');let scratching=false,erased=false;
-function setupCanvas(){const r=canvas.getBoundingClientRect(),dpr=window.devicePixelRatio||1;canvas.width=Math.round(r.width*dpr);canvas.height=Math.round(r.height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);const g=ctx.createLinearGradient(0,0,r.width,r.height);g.addColorStop(0,'#7a172d');g.addColorStop(.25,'#b98b66');g.addColorStop(.5,'#ead7b0');g.addColorStop(.72,'#9a2440');g.addColorStop(1,'#5c0b20');ctx.fillStyle=g;ctx.fillRect(0,0,r.width,r.height);ctx.fillStyle='rgba(255,242,215,.25)';for(let i=0;i<180;i++){ctx.beginPath();ctx.arc(Math.random()*r.width,Math.random()*r.height,Math.random()*1.2,0,Math.PI*2);ctx.fill()}ctx.globalCompositeOperation='destination-out';ctx.globalCompositeOperation='source-over';ctx.fillStyle='#f7e9d0';ctx.font='italic 18px Georgia';ctx.textAlign='center';ctx.fillText('✧  SCRATCH TO REVEAL  ✧',r.width/2,r.height/2+6);ctx.globalCompositeOperation='source-over';}
-function scratch(e){if(!scratching)return;const r=canvas.getBoundingClientRect(),x=(e.clientX-r.left),y=(e.clientY-r.top),dpr=window.devicePixelRatio||1;ctx.globalCompositeOperation='destination-out';ctx.beginPath();ctx.arc(x,y,19,0,Math.PI*2);ctx.fill();ctx.globalCompositeOperation='source-over';if(!erased){const data=ctx.getImageData(0,0,canvas.width,canvas.height).data;let clear=0;for(let i=3;i<data.length;i+=4)if(data[i]===0)clear++;if(clear/(data.length/4)>.42){erased=true;$('#scratchInstruction').style.opacity='0';}}}
-canvas.addEventListener('pointerdown',e=>{scratching=true;canvas.setPointerCapture(e.pointerId);scratch(e)});canvas.addEventListener('pointermove',scratch);['pointerup','pointercancel','pointerleave'].forEach(ev=>canvas.addEventListener(ev,()=>scratching=false));window.addEventListener('resize',()=>{if(!erased)setupCanvas()});setupCanvas();
-$('#yesBtn').addEventListener('click',()=>{$('#rsvpMessage').textContent='Alhamdulillah! We look forward to celebrating with you ♡';});$('#noBtn').addEventListener('click',()=>{$('#rsvpMessage').textContent='Thank you for letting us know. You will be in our thoughts ♡';});
-$('#soundToggle').addEventListener('click',e=>{e.preventDefault();$('#soundToggle').textContent=$('#soundToggle').textContent==='♫'?'♪':'♫';});
+const opening=document.getElementById('opening');
+const invitation=document.getElementById('invitation');
+const openButton=document.getElementById('openInvitation');
+const openText=document.getElementById('openText');
+let invitationOpened=false;
+function openInvite(){if(invitationOpened)return;invitationOpened=true;openButton.classList.add('open');openText.textContent='OPENING WITH LOVE…';setTimeout(()=>{opening.classList.add('opening-away');opening.style.transition='opacity .8s ease, transform .9s ease';opening.style.opacity='0';opening.style.transform='scale(1.025)';setTimeout(()=>{opening.style.display='none';invitation.classList.remove('is-hidden');window.scrollTo({top:0,behavior:'instant'});initReveal();},760);},750)}
+openButton.addEventListener('click',openInvite);openText.addEventListener('click',openInvite);
+// The envelope is the only first-screen control; tapping the wax seal opens the invitation.
+openButton.setAttribute('aria-label','Tap the wax seal to open the wedding invitation');
+const weddingDate=new Date('2026-11-23T10:30:00+05:30').getTime();
+function countdown(){let d=Math.max(0,weddingDate-Date.now());const vals=[Math.floor(d/86400000),Math.floor(d%86400000/3600000),Math.floor(d%3600000/60000),Math.floor(d%60000/1000)];['days','hours','minutes','seconds'].forEach((id,i)=>document.getElementById(id).textContent=String(vals[i]).padStart(2,'0'));}
+countdown();setInterval(countdown,1000);
+// A real scratch-to-reveal layer, matching the reference invitation interaction.
+const canvas=document.getElementById('scratchCanvas'),ctx=canvas.getContext('2d'),scratchWrap=document.getElementById('scratchWrap');let scratching=false,hasRevealed=false,lastPoint=null;
+function paintScratch(){
+  const rect=scratchWrap.getBoundingClientRect();
+  if(!rect.width||!rect.height)return;
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  canvas.width=Math.round(rect.width*dpr);canvas.height=Math.round(rect.height*dpr);
+  canvas.style.width=rect.width+'px';canvas.style.height=rect.height+'px';
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  // A clean parchment scratch layer: no duplicate text over the hidden date.
+  const g=ctx.createLinearGradient(0,0,rect.width,rect.height);
+  g.addColorStop(0,'#f8ead5');g.addColorStop(.48,'#ead2af');g.addColorStop(1,'#f5e2c5');
+  ctx.globalCompositeOperation='source-over';ctx.fillStyle=g;ctx.fillRect(0,0,rect.width,rect.height);
+  ctx.strokeStyle='#c4a16a';ctx.lineWidth=1;ctx.strokeRect(13,13,rect.width-26,rect.height-26);
+  ctx.strokeStyle='rgba(255,250,239,.8)';ctx.lineWidth=2;ctx.strokeRect(18,18,rect.width-36,rect.height-36);
+  // Fine paper flecks for a subtle premium texture.
+  for(let i=0;i<95;i++){const x=Math.random()*rect.width,y=Math.random()*rect.height;ctx.fillStyle=`rgba(139,91,51,${Math.random()*.07})`;ctx.fillRect(x,y,1.2,1.2)}
+  lastPoint=null;
+}
+function scratchAt(e){const r=canvas.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;ctx.globalCompositeOperation='destination-out';ctx.lineWidth=42;ctx.lineCap='round';ctx.lineJoin='round';if(lastPoint){ctx.beginPath();ctx.moveTo(lastPoint.x,lastPoint.y);ctx.lineTo(x,y);ctx.stroke()}else{ctx.beginPath();ctx.arc(x,y,22,0,Math.PI*2);ctx.fill()}lastPoint={x,y};const img=ctx.getImageData(0,0,canvas.width,canvas.height).data;let clear=0;for(let i=3;i<img.length;i+=32)if(img[i]<30)clear++;if(clear/(img.length/32)>.38)revealDate();}
+function revealDate(){if(hasRevealed)return;hasRevealed=true;scratchWrap.classList.add('revealed');showerRosePetals(18);}
+canvas.addEventListener('pointerdown',e=>{if(hasRevealed)return;scratching=true;lastPoint=null;canvas.setPointerCapture?.(e.pointerId);scratchAt(e)});canvas.addEventListener('pointermove',e=>{if(scratching&&!hasRevealed){e.preventDefault();scratchAt(e)}},{passive:false});function stopScratch(){scratching=false;lastPoint=null}canvas.addEventListener('pointerup',stopScratch);canvas.addEventListener('pointercancel',stopScratch);canvas.addEventListener('click',()=>{if(!hasRevealed){for(let i=0;i<5;i++)scratchAt({clientX:canvas.getBoundingClientRect().left+canvas.clientWidth*(.35+Math.random()*.3),clientY:canvas.getBoundingClientRect().top+canvas.clientHeight*(.35+Math.random()*.3)});}});
+function showerRosePetals(count=20){const layer=document.querySelector('.ambient-petals');for(let i=0;i<count;i++){const p=document.createElement('span');p.className='rose-petal';p.style.left=Math.random()*100+'%';p.style.setProperty('--duration',(3.3+Math.random()*2.4)+'s');p.style.setProperty('--drift',Math.round(Math.random()*220-110)+'px');p.style.setProperty('--rotation',Math.round(Math.random()*360)+'deg');p.style.width=(10+Math.random()*10)+'px';p.style.height=(16+Math.random()*13)+'px';p.style.animationDelay=(Math.random()*.8)+'s';layer.appendChild(p);setTimeout(()=>p.remove(),6500)} }
+document.getElementById('yesBtn').addEventListener('click',()=>{const el=document.getElementById('rsvpResponse');el.textContent='In shaa Allah, your presence will make our day more beautiful. ♡';el.classList.add('show');showerRosePetals(12)});
+document.getElementById('noBtn').addEventListener('click',()=>{const el=document.getElementById('rsvpResponse');el.textContent='You will be missed. Keep us in your duas. ♡';el.classList.add('show');showerRosePetals(10)});
+const music=document.getElementById('weddingMusic'),musicToggle=document.getElementById('musicToggle');musicToggle.addEventListener('click',async()=>{if(music.paused){try{await music.play();musicToggle.textContent='♫';musicToggle.classList.add('playing')}catch(e){musicToggle.textContent='♪'}}else{music.pause();musicToggle.classList.remove('playing')}});
+function initReveal(){const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce||!('IntersectionObserver'in window))return;const sections=document.querySelectorAll('.page-section');sections.forEach(s=>Array.from(s.children).forEach(c=>{if(!c.classList.contains('reveal-item')&&c.tagName!=='CANVAS')c.classList.add('reveal-item')}));const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.12,rootMargin:'0px 0px -30px 0px'});document.querySelectorAll('.reveal-item').forEach(el=>{if(el.getBoundingClientRect().top<innerHeight*.9)el.classList.add('visible');else observer.observe(el)});paintScratch();}
+window.addEventListener('resize',()=>{if(!invitation.classList.contains('is-hidden')&&!hasRevealed)paintScratch()});document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const target=document.querySelector(a.getAttribute('href'));if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'})}}));
