@@ -91,3 +91,55 @@
 .date-card-flourish{position:absolute;bottom:25px;color:#b18b54;font-size:17px;letter-spacing:.12em;z-index:1}
 .reveal-note{font-size:clamp(22px,6vw,29px);line-height:1.4;margin-top:30px;color:#8e6d5e}
 @media(max-width:380px){.date-card .date-day{left:18px}.date-card .date-time{right:18px}.date-card .date-day,.date-card .date-time{font-size:8px}}
+
+/* Premium editorial finish inspired by the approved cream + merlot reference */
+:root{--cream:#f7ead9;--paper:#fff7eb;--wine:#651327;--wine2:#46101f;--gold:#b99a62;--ink:#6e4e45;--muted:#9c7b6a;--line:#d7b99b}
+body{font-family:'Cormorant Garamond',serif;background:#f6e9d7;color:var(--wine)}
+.opening{background:radial-gradient(ellipse at center,#fff6e8 0%,#f3dfc7 68%,#e6c6a7 100%)}
+.opening-frame{border:1px solid #741b31;box-shadow:inset 0 0 0 5px #f8ead6,inset 0 0 0 6px #c5a36c}
+.envelope-body:before{border-color:#a98256;box-shadow:inset 0 0 0 4px #f6e5cc,inset 0 0 0 5px #d5b77e}
+.envelope-seal{background:radial-gradient(circle at 30% 24%,#8c2940,#641328 70%,#430b1b);border-color:#c5a36c;box-shadow:0 5px 12px #4d132e44,inset 0 0 0 5px #6c1a2d,inset 0 0 0 7px #d1ad72}
+.page-section{border-left:1px solid #e1c6a9;border-right:1px solid #e1c6a9}
+.hero,.reveal-section,.venue-section,.closing{background:linear-gradient(145deg,#fff7eb 0%,#f7e8d5 52%,#fff7eb 100%)}
+.hero:before,.hero:after{color:#77182f;opacity:.23}
+.lace-top{height:43px;background:repeating-linear-gradient(45deg,transparent 0 5px,#b99a62 5px 6px,transparent 6px 12px);opacity:.55}
+.hero h1{font-family:'Great Vibes',cursive;font-size:clamp(66px,18vw,94px);line-height:.95;letter-spacing:0;color:#641327}
+.hero h1 i{font-family:'Cormorant Garamond',serif;font-size:.52em;font-style:italic;color:#b18b4e}
+.page-section h2{font-family:'Great Vibes',cursive;font-style:normal;font-size:clamp(48px,13vw,68px);color:#651327}
+.section-kicker,.invite-small,.bismillah-en,.closing-caption{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.26em}
+.hero-message,.reveal-note,.countdown-sub,.venue-address,.rsvp-question{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,5.5vw,28px);font-style:italic;color:#8c6d5d}
+.scratch-caption{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.22em}
+/* The wedding date is displayed directly; no scratch layer or scratch interaction. */
+.scratch-wrap{height:clamp(300px,84vw,355px);max-height:360px;width:min(84vw,350px);overflow:visible;border-radius:3px;background:linear-gradient(135deg,#f5dfbd,#fff4e1);box-shadow:0 16px 34px #65132716;}
+.date-underlay{background:linear-gradient(145deg,#fff5e5,#f0d7b4);border:2px solid #6d1830;outline:1px solid #bd985b;outline-offset:5px;box-shadow:inset 0 0 0 7px #f9e9d1;}
+.date-underlay:before{inset:14px;border:1px solid #c19c60;box-shadow:inset 0 0 0 4px #fff1dc}
+.date-underlay:after{content:'✦  ❦  ✦';position:absolute;top:23px;left:0;right:0;font-size:19px;letter-spacing:.35em;color:#9a1d3b}
+.date-month{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.28em;color:#6d1830}
+.date-underlay strong{font-family:'Cormorant Garamond',serif;font-size:clamp(108px,29vw,132px);font-weight:500;color:#651327;line-height:.86}
+.date-year{font-family:'Cormorant Garamond',serif;font-size:19px;letter-spacing:.35em;color:#651327;background:transparent}
+.date-day,.date-time{top:auto;bottom:28px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.18em;color:#7a2338}
+.date-day{left:23px}.date-time{right:23px}
+.date-card-flourish{position:absolute;bottom:55px;color:#b18b4e;font-size:17px}
+.countdown-section{background:linear-gradient(145deg,#641327,#4b1021);border-color:#8b4c54;box-shadow:inset 0 0 0 7px #641327,inset 0 0 0 8px #b99a62}
+.countdown-section h2{color:#fff0dd}
+.countdown div{border-top-color:#c8a86d}
+.countdown strong{font-family:'Cormorant Garamond',serif}
+.location-art{border:1px solid #6d1830;outline:1px solid #c09b61;outline-offset:5px;box-shadow:inset 0 0 0 8px #fbf0df,inset 0 0 0 9px #c7a46b}
+.venue-section h3{font-family:'Great Vibes',cursive;font-size:clamp(34px,9vw,46px);color:#651327}
+.directions,.yes-button{background:#651327;border-color:#651327;color:#fff5e7;border-radius:30px;letter-spacing:.14em;box-shadow:0 8px 22px #65132722}
+.no-button{border-color:#651327;border-radius:30px;letter-spacing:.12em}
+.rsvp-section{background:linear-gradient(145deg,#fff7eb,#f5e2cd);border:1px solid #b99a62;outline:1px solid #6d1830;outline-offset:-8px}
+.rsvp-section h2{font-family:'Great Vibes',cursive;font-style:normal;font-size:clamp(60px,15vw,82px)}
+.closing{background:linear-gradient(145deg,#fff7eb,#f3e0ca);box-shadow:inset 0 0 0 10px #f7ead9,inset 0 0 0 11px #c6a46b}
+.closing-names{font-family:'Great Vibes',cursive;font-size:clamp(42px,11vw,58px);color:#651327}
+.music-toggle{background:#fff5e6;border-color:#c4a46b;color:#651327}
+@media(min-width:700px){.page-section{padding-left:calc((100vw - 540px)/2);padding-right:calc((100vw - 540px)/2)}}
+
+/* Restored premium scratch-to-reveal layer */
+.scratch-wrap.date-card{position:relative;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none}
+#scratchCanvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:crosshair;z-index:3;border-radius:5px}
+.scratch-hint{position:absolute;inset:0;z-index:4;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;pointer-events:none;color:#651a2d;text-shadow:0 1px 0 #fff7e9;transition:opacity .25s}
+.scratch-hint span{font-size:38px;line-height:1}
+.scratch-hint small{font-family:'DM Sans',sans-serif;font-size:9px;letter-spacing:.22em;background:#fff6e8e8;padding:8px 12px;color:#651a2d}
+.scratch-wrap.revealed #scratchCanvas{opacity:0;pointer-events:none;transition:opacity .65s ease}
+.scratch-wrap.revealed .scratch-hint{opacity:0}
