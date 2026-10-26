@@ -1,56 +1,75 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f7eee0"><meta name="description" content="Fahmida & Salih wedding invitation — 23 November 2026"><title>Fahmida & Salih | Wedding Invitation</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
-</head><body>
-<div class="ambient-petals" aria-hidden="true"></div>
-<button class="music-toggle" id="musicToggle" aria-label="Play wedding music">♫</button><audio id="weddingMusic" src="wedding-music.mp3" loop preload="none"></audio>
-<section class="opening" id="opening" aria-label="Open wedding invitation">
-  <div class="opening-frame"></div><div class="corner-bloom bloom-a">✿</div><div class="corner-bloom bloom-b">✿</div>
-  <p class="opening-kicker">A LITTLE SOMETHING, MADE WITH LOVE</p>
-  <button class="envelope-scene" id="openInvitation" aria-label="Open invitation">
-    <div class="envelope-paper"><span class="paper-sprig">❧</span><span class="paper-top">YOU ARE INVITED</span><span class="paper-monogram">F <i>&</i> S</span><span class="paper-date">23 · 11 · 2026</span></div>
-    <div class="envelope-body"></div><div class="envelope-flap"></div><div class="envelope-seal" aria-hidden="true"></div>
-  </button>
-  <p class="opening-names">Fahmida <i>&</i> Salih</p><p class="opening-sub">Our forever begins, in shaa Allah</p>
-  <button class="open-link" id="openText">OPEN INVITATION <span>↗</span></button>
-  <p class="opening-foot">WITH THE BLESSINGS OF ALLAH</p>
-</section>
-<main id="invitation" class="invitation is-hidden">
-  <section class="hero page-section">
-    <div class="lace-top"></div><div class="floral-corner fc-left">✿</div><div class="floral-corner fc-right">✿</div>
-    <div class="hero-emblem">❦</div><p class="arabic bismillah-ar" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-    <p class="bismillah-en">IN THE NAME OF ALLAH<br>THE MOST GRACIOUS AND THE MOST MERCIFUL</p>
-    <div class="ornament-line"><span>✦</span></div>
-    <p class="invite-small">TOGETHER WITH OUR FAMILIES</p><h1>Fahmida <i>&</i><br>Salih</h1><p class="hero-heart">♡</p>
-    <p class="hero-message">With the blessings of Allah and our beloved families, we joyfully invite you to celebrate the beginning of our forever.</p>
-    <a href="#reveal" class="scroll-cue"><span class="scroll-icon">⌄</span><small>SCROLL TO EXPLORE</small></a>
-  </section>
-  <section class="reveal-section page-section" id="reveal">
-    <p class="section-kicker">A MOMENT MADE FOR US</p><h2>Our Wedding Day</h2><p class="scratch-caption">WITH THE BLESSINGS OF ALLAH, OUR FOREVER BEGINS</p>
-    <div class="scratch-wrap date-card" id="scratchWrap" aria-label="Scratch to reveal wedding date">
-      <div class="date-underlay"><span class="date-month">MONDAY · NOVEMBER</span><strong>23</strong><span class="date-year">2026</span><span class="date-day">NIKKAH</span><span class="date-time">10:30 AM</span><span class="date-card-flourish">✦ &nbsp; ♡ &nbsp; ✦</span></div>
-      <canvas id="scratchCanvas" aria-label="Scratch here to reveal the wedding date"></canvas>
-      <div class="scratch-hint" id="scratchHint"><span>✧</span><small>SCRATCH TO REVEAL</small></div>
-    </div>
-    <p class="reveal-note">A beautiful day, a blessed beginning ♡</p>
-  </section>
-  <section class="countdown-section page-section">
-    <p class="section-kicker">OUR SPECIAL DAY</p><h2>Days to Go</h2><p class="countdown-sub">Until we begin our forever</p>
-    <div class="countdown"><div><strong id="days">00</strong><span>DAYS</span></div><div><strong id="hours">00</strong><span>HOURS</span></div><div><strong id="minutes">00</strong><span>MINUTES</span></div><div><strong id="seconds">00</strong><span>SECS</span></div></div>
-    <div class="nikah-time"><span class="tiny-flower">♥</span><p>NIKKAH</p><strong>10:30 AM</strong><span class="tiny-flower">♥</span></div>
-  </section>
-  <section class="venue-section page-section">
-    <p class="section-kicker">CELEBRATE WITH US</p><h2>Venue</h2>
-    <a class="location-art" href="https://share.google/dfnha4yEMqCZf7LrT" target="_blank" rel="noopener" aria-label="Open venue in Google Maps"><span class="map-pin">♥</span><span class="location-label">L O C A T I O N</span><span class="map-flower">✳</span><span class="map-open">↗</span></a>
-    <p class="map-instruction">⌃ Click on the venue to see the location in Google Maps</p><h3>Sabha Hall Auditorium</h3><p class="venue-address">1st Mile, Kizhisseri<br>Malappuram, Kerala</p><p class="venue-date">MONDAY · 23 NOVEMBER 2026</p><a class="directions" href="https://share.google/dfnha4yEMqCZf7LrT" target="_blank" rel="noopener">VIEW LOCATION ↗</a>
-  </section>
-  <section class="rsvp-section page-section">
-    <p class="section-kicker">KINDLY REPLY</p><h2>RSVP</h2><p class="rsvp-question">Will you be attending?</p>
-    <div class="rsvp-buttons"><button class="yes-button" id="yesBtn">Yes, In shaa Allah! ♡</button><button class="no-button" id="noBtn">Sorry, I can't make it</button></div>
-    <p class="rsvp-response" id="rsvpResponse" aria-live="polite"></p>
-  </section>
-  <section class="closing page-section"><div class="closing-flower">✿</div><p class="arabic closing-ar" lang="ar" dir="rtl">إِنْ شَاءَ اللّٰهُ</p><p class="closing-caption">IN SHAA ALLAH</p><div class="closing-ornament">♡</div><p class="closing-names">Fahmida <i>&</i> Salih</p><p class="closing-date">23 · 11 · 2026</p><p class="made-with-love">created with love ♡</p></section>
-</main>
-<script src="script.js"></script></body></html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5e6d5">
+<title>Fahmida & Salih — Wedding Invitation</title>
+<style>
+:root{--wine:#710d27;--cream:#f5e6d5}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#2a1016;font-family:Georgia,'Times New Roman',serif}
+#app{height:100dvh;width:100%;display:flex;align-items:center;justify-content:center;position:relative;background:radial-gradient(ellipse,#6a3c38,#1c0b10)}
+#invitation{position:relative;height:100%;width:min(100vw,56.25vh);max-width:100vw;aspect-ratio:9/16;overflow:hidden;background:var(--cream);box-shadow:0 0 40px #0008;touch-action:pan-y}
+#pageImage{display:block;width:100%;height:100%;object-fit:fill;user-select:none;-webkit-user-drag:none}
+.hotspot{position:absolute;display:block;border:0;background:transparent;cursor:pointer;border-radius:999px;z-index:2}
+.hotspot:focus-visible{outline:2px solid white;outline-offset:2px}
+#hint{position:absolute;left:0;right:0;bottom:8px;text-align:center;color:#fff9;font:11px Arial,sans-serif;letter-spacing:.12em;pointer-events:none;text-shadow:0 1px 4px #000}
+#prev,#next{position:absolute;top:0;bottom:0;width:13%;z-index:1;background:transparent;border:0;cursor:pointer}
+#prev{left:0}#next{right:0}
+#status{position:absolute;top:8px;right:8px;z-index:4;background:#4e071db8;color:#fff;padding:5px 9px;border-radius:20px;font:10px Arial,sans-serif;letter-spacing:.08em;opacity:0;transition:opacity .3s}
+#status.show{opacity:1}
+@media (min-aspect-ratio:9/16){#invitation{height:100dvh;width:auto;max-width:100vw}}
+@media (max-aspect-ratio:9/16){#invitation{width:100vw;height:100dvh;aspect-ratio:auto}}
+</style>
+</head>
+<body>
+<div id="app">
+ <main id="invitation" aria-label="Interactive wedding invitation">
+  <img id="pageImage" src="images/01_Sealed_Envelope.png" alt="Fahmida and Salih wedding invitation">
+  <button id="prev" aria-label="Previous page" title="Previous page"></button>
+  <button id="next" aria-label="Next page" title="Next page"></button>
+  <div id="status"></div>
+  <div id="hint">TAP TO CONTINUE · SWIPE TO TURN PAGES</div>
+ </main>
+</div>
+<script>
+const pages = [
+ {file:"01_Sealed_Envelope.png", alt:"A special invitation", hotspots:[{x:28,y:87,w:44,h:9,to:1,label:"Open invitation"}]},
+ {file:"02_Opening_Surprise.png",alt:"A little surprise",hotspots:[{x:24,y:68,w:52,h:9,to:2,label:"Open"}]},
+ {file:"03_Names_Invitation.png",alt:"Fahmida and Salih wedding invitation",hotspots:[{x:35,y:91,w:30,h:7,to:3,label:"Continue"}]},
+ {file:"04_Date_Reveal.png",alt:"Reveal our wedding date",hotspots:[{x:29,y:81,w:42,h:7,to:4,label:"Swipe here"}]},
+ {file:"05_Wedding_Date.png",alt:"Monday 23 November 2026",hotspots:[{x:0,y:0,w:100,h:100,to:5,label:"Continue"}]},
+ {file:"06_Countdown.png",alt:"Counting down to our day",hotspots:[{x:0,y:0,w:100,h:100,to:6,label:"Continue"}]},
+ {file:"07_Nikah_Details.png",alt:"Nikah details, 23 November 2026 at 10:30 AM",hotspots:[{x:0,y:0,w:100,h:100,to:7,label:"Continue"}]},
+ {file:"08_Venue.png",alt:"Sabha Hall-Auditorium, 1st Mile, Kizhisseri, Malappuram, Kerala",hotspots:[{x:20,y:49,w:60,h:9,action:"location",label:"Open location"},{x:0,y:0,w:100,h:100,to:8,label:"Continue"}]},
+ {file:"09_RSVP.png",alt:"Kindly respond",hotspots:[{x:18,y:58,w:64,h:8,action:"yes",label:"I will be there"},{x:18,y:70,w:64,h:8,action:"no",label:"Regretfully no"}]},
+ {file:"10_Closing.png",alt:"Jazakum Allahu Khairan, Fahmida and Salih",hotspots:[{x:0,y:0,w:100,h:100,to:0,label:"Back to beginning"}]}
+];
+let current=0;
+const image=document.getElementById('pageImage'), invitation=document.getElementById('invitation'), status=document.getElementById('status');
+function showStatus(message){status.textContent=message;status.classList.add('show');setTimeout(()=>status.classList.remove('show'),2600)}
+function render(index){
+ current=(index+pages.length)%pages.length;
+ const page=pages[current];
+ image.src='images/'+page.file; image.alt=page.alt;
+ invitation.querySelectorAll('.dynamic-hotspot').forEach(el=>el.remove());
+ page.hotspots.forEach(h=>{
+   const b=document.createElement('button');b.className='hotspot dynamic-hotspot';
+   b.style.left=h.x+'%';b.style.top=h.y+'%';b.style.width=h.w+'%';b.style.height=h.h+'%';
+   b.setAttribute('aria-label',h.label);b.title=h.label;
+   b.addEventListener('click',e=>{e.stopPropagation();if(h.to!==undefined)render(h.to);else if(h.action==='location')window.open('https://www.google.com/maps/search/?api=1&query='+encodeURIComponent('Sabha Hall Auditorium, 1st Mile, Kizhisseri, Malappuram, Kerala'),'_blank');else if(h.action==='yes'){showStatus('Thank you! We look forward to seeing you.');}else if(h.action==='no'){showStatus('Thank you for letting us know.');}});
+   invitation.appendChild(b);
+ });
+}
+document.getElementById('prev').addEventListener('click',()=>render(current-1));
+document.getElementById('next').addEventListener('click',()=>render(current+1));
+let startX=0,startY=0;
+invitation.addEventListener('touchstart',e=>{startX=e.changedTouches[0].clientX;startY=e.changedTouches[0].clientY},{passive:true});
+invitation.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-startX,dy=e.changedTouches[0].clientY-startY;if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy))render(current+(dx<0?1:-1));},{passive:true});
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();render(current+1)}if(e.key==='ArrowLeft'){e.preventDefault();render(current-1)}});
+image.addEventListener('click',()=>{if(current===4||current===5||current===6||current===9)render(current+1)});
+render(0);
+</script>
+</body>
+</html>
