@@ -26,7 +26,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#2a1016;fon
 <body>
 <div id="app">
  <main id="invitation" aria-label="Interactive wedding invitation">
-  <img id="pageImage" src="images/01_Sealed_Envelope.png" alt="Fahmida and Salih wedding invitation">
+  <img id="pageImage" src="01_Sealed_Envelope.png"" alt="Fahmida and Salih wedding invitation">
   <button id="prev" aria-label="Previous page" title="Previous page"></button>
   <button id="next" aria-label="Next page" title="Next page"></button>
   <div id="status"></div>
@@ -52,7 +52,7 @@ function showStatus(message){status.textContent=message;status.classList.add('sh
 function render(index){
  current=(index+pages.length)%pages.length;
  const page=pages[current];
- image.src='images/'+page.file; image.alt=page.alt;
+ image.src=page.file; image.alt=page.alt;
  invitation.querySelectorAll('.dynamic-hotspot').forEach(el=>el.remove());
  page.hotspots.forEach(h=>{
    const b=document.createElement('button');b.className='hotspot dynamic-hotspot';
